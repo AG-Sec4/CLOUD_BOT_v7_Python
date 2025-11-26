@@ -1,4 +1,4 @@
-# CLOUD_BOT_v7_Python  
+CLOUD_BOT_v7_Python  
 Smart • Modular • Python-Driven Trading Framework
 
 CLOUD_BOT_v7_Python is a clean, modern trading framework designed to focus on **Python architecture**, readability, and maintainability.  
@@ -17,7 +17,7 @@ This version is ideal for Python learning, experimentation, and building real au
 
 ---
 
-## 📁 Project Structure
+📁 Project Structure
 
 CLOUD_BOT_v7_Python/
 │
