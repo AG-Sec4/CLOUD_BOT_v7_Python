@@ -19,26 +19,6 @@ This version is ideal for Python learning, experimentation, and building real au
 
 ## 📁 Project Structure
 
-CLOUD_BOT_v7_Python/
-│
-├── bot.py # Main trading loop
-├── settings.json # User-modifiable settings
-├── requirements.txt # Python dependencies
-│
-├── constants/
-│ └── defs.py # API keys, URLs, loader functions
-│
-├── infrastructure/
-│ └── log_wrapper.py # Central logging system
-│
-├── modules/
-│ ├── candle_manager.py # Fetches OHLC candles
-│ ├── technical_manager.py # Strategy logic + indicators
-│ ├── trade_manager.py # Executes trades
-│ └── trade_risk_calculator.py # Calculates safe units
-│
-└── logs/
-└── main_YYYYMMDD.log # Auto-created daily logs
 
 ---
 
