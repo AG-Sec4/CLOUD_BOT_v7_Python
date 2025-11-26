@@ -1,27 +1,19 @@
 # CLOUD_BOT_v7_Python  
 Smart • Modular • Python-Driven Trading Framework
 
-CLOUD_BOT_v7_Python is a clean, modern trading framework designed to focus on **Python engineering**, **readability**, and **maintainability**.  
-This version is ideal for Python learning, experimentation, and building real automated systems with clear logic and full transparency.
-
-The entire project is structured to be:
-- easy to extend  
-- easy to read  
-- easy to test  
-- easy to debug  
-- fully API-ready  
-- fully GitHub-friendly  
+CLOUD_BOT_v7_Python is a clean, modern trading framework designed to focus on **Python architecture**, readability, and maintainability.  
+This version is ideal for Python learning, experimentation, and building real automated systems.
 
 ---
 
 ## ⭐ Key Goals
 - Clean Python architecture  
-- Full modular design  
-- Simple, clear strategy components  
+- Modular components  
+- Clear strategy implementation  
 - Strong logging system  
 - Config-driven behaviour  
-- Expandable for ML / regime filters / volatility systems  
-- Perfect template for building advanced versions  
+- Future-proof structure  
+- Easy to extend (ML, backtests, multi-strategy, automation)
 
 ---
 
@@ -29,27 +21,24 @@ The entire project is structured to be:
 
 CLOUD_BOT_v7_Python/
 │
-├── bot.py # Main trading loop
-├── settings.json # All user-modifiable settings
-├── requirements.txt # Required Python packages
+├── bot.py                         # Main trading loop
+├── settings.json                  # User-modifiable settings
+├── requirements.txt               # Required Python packages
 │
 ├── constants/
-│ └── defs.py # API keys, URLs, loader functions
+│   └── defs.py                    # API keys, URLs, loader functions
 │
 ├── infrastructure/
-│ └── log_wrapper.py # Central logging system
+│   └── log_wrapper.py             # Central logging system
 │
 ├── modules/
-│ ├── candle_manager.py # Fetches and prepares OHLC data
-│ ├── technical_manager.py # Strategy logic and indicators
-│ ├── trade_manager.py # Executes orders safely
-│ └── trade_risk_calculator.py # Calculates position size
+│   ├── candle_manager.py          # Fetches OHLC candles
+│   ├── technical_manager.py       # Strategy logic + indicators
+│   ├── trade_manager.py           # Executes trades
+│   └── trade_risk_calculator.py   # Calculates safe units
 │
 └── logs/
-└── main_YYYYMMDD.log # Auto-created daily logs
-
-css
-Copy code
+    └── main_YYYYMMDD.log          # Auto-created daily logs
 
 ---
 
@@ -58,10 +47,10 @@ Copy code
 ```mermaid
 flowchart TD
 
-A[bot.py\nMain Loop] --> B[candle_manager.py\nFetch & Prepare]
-A --> C[technical_manager.py\nSignals]
-A --> D[trade_risk_calculator.py\nUnits]
-A --> E[trade_manager.py\nOrders]
+A[bot.py<br>Main Loop] --> B[candle_manager.py<br>Fetch & Prepare]
+A --> C[technical_manager.py<br>Signals]
+A --> D[trade_risk_calculator.py<br>Units]
+A --> E[trade_manager.py<br>Orders]
 
 B --> F[constants/defs.py]
 C --> F
@@ -69,118 +58,83 @@ D --> F
 E --> F
 
 A --> G[settings.json]
-A --> H[infrastructure/log_wrapper.py\nLogger]
-⚙️ How It Works (Simple Explanation)
-1. bot.py
-Controls everything.
-For each pair:
+A --> H[infrastructure/log_wrapper.py<br>Logger]
+```
 
-get candles
+---
 
-generate signal
+## ⚙️ How It Works (Simple Explanation)
 
-calculate units
+### **1. bot.py**
+Controls the system:
+- fetch candles  
+- generate signal  
+- calculate units  
+- place trades  
+- log everything  
 
-execute trade
+### **2. candle_manager.py**
+Downloads OHLC candles from OANDA.
 
-log results
+### **3. technical_manager.py**
+Applies MA + STD logic to create BUY / SELL / None.
 
-2. candle_manager.py
-Fetches price data from OANDA.
-Converts into a list of closing prices.
+### **4. trade_risk_calculator.py**
+Converts risk per trade → safe units.
 
-3. technical_manager.py
-Applies moving averages and standard deviation logic.
-Generates:
+### **5. trade_manager.py**
+Sends orders safely to OANDA.
 
-BUY
+### **6. log_wrapper.py**
+Creates daily rotating logs.
 
-SELL
+---
 
-or None
+## ⚙️ Installation
 
-4. trade_risk_calculator.py
-Calculates safe units based on:
-
-account size
-
-risk per trade
-
-stop loss
-
-5. trade_manager.py
-Sends orders to OANDA using clean JSON payloads.
-
-6. log_wrapper.py
-Handles all logging and makes daily logs automatically.
-
-⚙️ Installation
-1. Clone repo
-bash
-Copy code
+```bash
 git clone https://github.com/AG-Sec4/CLOUD_BOT_v7_Python.git
 cd CLOUD_BOT_v7_Python
-2. Install dependencies
-bash
-Copy code
 pip install -r requirements.txt
-3. Configure keys
-Edit constants/defs.py or export ENV variables:
+```
 
-bash
-Copy code
-export OANDA_API_KEY="your_key"
-export OANDA_ACCOUNT_ID="your_id"
-export OANDA_URL="https://api-fxpractice.oanda.com/v3"
-4. Update settings (optional)
-settings.json
+---
 
-▶️ Running the Bot
-bash
-Copy code
+## ▶️ Running the Bot
+
+```bash
 python bot.py
-Daily logs appear in:
+```
 
-bash
-Copy code
+Logs appear in:
+
 ./logs/main_YYYYMMDD.log
-📘 Glossary (For New Traders)
-Candle — OHLC data for one time period
-MA — Moving Average
-STD — Standard Deviation
-SL / TP — Stop Loss / Take Profit
-Units — Position size on OANDA
-Granularity — Timeframe of candles (M1/M5/M15…)
-Signal — BUY/SELL generated by strategy
-Risk per trade — How much you are willing to lose
 
-📈 Future Extensions
-This structure is ready for:
+---
 
-ATR-based trailing stops
+## 📘 Glossary (Quick)
 
-Market regime filters
+**MA** — Moving Average  
+**STD** — Standard Deviation  
+**SL/TP** — Stop Loss / Take Profit  
+**Granularity** — Candle timeframe  
+**Units** — OANDA position size  
 
-Multi-strategy engine
+---
 
-ML/AI indicators
+## 📈 Ready for Future Expansions
 
-Backtesting engine
+- ATR trailing stop  
+- Volatility filters  
+- ML/AI indicators  
+- Backtesting engine  
+- n8n or Discord alerts  
+- Multi-strategy engine  
+- Equity tracking  
 
-n8n automation
+---
 
-Discord/Telegram alerts
+## 🚀 Enjoy Building
 
-Real equity tracking
-
-🧩 Why This Version?
-This repository is designed to act as a clean learning template.
-Everything is simple, structured, and understandable — perfect for:
-
-improving Python skills
-
-learning clean architecture
-
-testing new ideas
-
-evolving into a professional bot
+This version is built to grow with your Python skills.  
+Extend it. Improve it. Automate it.
